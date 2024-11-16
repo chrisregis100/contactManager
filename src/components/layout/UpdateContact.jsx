@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 
-function ContactForm({ refreshList, CloseForm }) {
+function UpdateForm({ refreshList, CloseForm, contactId }) {
   const [contactType, setContactType] = useState([]);
   const [country, setCountry] = useState([]);
   const [firstname, setFirstname] = useState("");
@@ -51,30 +51,50 @@ function ContactForm({ refreshList, CloseForm }) {
     fetchCountry();
   }, []);
 
-  // enregistrer le contact
-  const handleSubmit = async (e) => {
+  //recupérer les infos sur le contact à modifier
+  useEffect(() => {
+    async function fetchContactDetails() {
+      const response = await fetch(
+        `http://localhost:5000/api/contact/${contactId}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setFirstname(data.firstname);
+        setLastname(data.lastname);
+        setPhoneNumber(data.phoneNumber);
+        setEmail(data.email);
+        setTypeOfContact(data.typeOfContact);
+      }
+    }
+    fetchContactDetails();
+  }, [contactId]);
+
+  //Mettre à jour le contact
+  const handleUpdate = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstname,
-          lastname,
-          phoneNumber: prefix.slice(0) + phoneNumber,
-          email,
-          typeOfContact,
-        }),
-      });
+      const response = await fetch(
+        `http://localhost:5000/api/contact/${contactId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstname,
+            lastname,
+            phoneNumber: prefix.slice(0) + phoneNumber,
+            email,
+            typeOfContact,
+          }),
+        }
+      );
       if (response.ok) {
-        toast.success("Contact enregistré");
-        refreshList();
+        toast.success("Contact mis à jour avec succès");
         CloseForm();
       } else {
-        throw new Error("erreur lors de l'enregistrement");
+        throw new Error("erreur lors de la sauvegarde");
       }
     } catch (error) {
       console.error("Erreur lors de l'enregistrement", error);
@@ -89,7 +109,7 @@ function ContactForm({ refreshList, CloseForm }) {
       onClick={(e) => {
         e.stopPropagation();
       }}
-      onSubmit={handleSubmit}
+      onSubmit={handleUpdate}
     >
       <div className="form-div ">
         <label htmlFor="">Firstname</label>
@@ -97,6 +117,7 @@ function ContactForm({ refreshList, CloseForm }) {
           type="text"
           placeholder="Ex:John"
           className="input"
+          value={firstname}
           onChange={(e) => setFirstname(e.target.value)}
         />
       </div>
@@ -106,6 +127,7 @@ function ContactForm({ refreshList, CloseForm }) {
           type="text"
           placeholder="Ex:Doe"
           className="input"
+          value={lastname}
           onChange={(e) => setLastname(e.target.value)}
         />
       </div>
@@ -115,6 +137,7 @@ function ContactForm({ refreshList, CloseForm }) {
           type="text"
           placeholder="Ex:john@gmail.com"
           className="input"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
@@ -145,6 +168,7 @@ function ContactForm({ refreshList, CloseForm }) {
             type="text"
             placeholder="Ex:76543210"
             className="input"
+            value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
@@ -173,4 +197,4 @@ function ContactForm({ refreshList, CloseForm }) {
   );
 }
 
-export default ContactForm;
+export default UpdateForm;

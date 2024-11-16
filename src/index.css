@@ -7,7 +7,7 @@ body{
 }
 
 .column{
-    @apply flex flex-col py-4  rounded-lg h-screen shadow-lg shadow-blue-700;
+    @apply flex flex-col py-4  rounded-lg  shadow-lg shadow-blue-700;
 }
 button{
     @apply hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white transition-all duration-300 ease-in-out;
@@ -21,4 +21,7 @@ button{
 }
 .input{
     @apply rounded-lg border border-black px-2 text-lg w-full text-[20px] h-12 focus:border-blue-700 focus:outline-none
+}
+.input-disable{
+    @apply h-14 border-b-2 border-b-blue-700 border hover:bg-blue-700 hover:text-white transition-all duration-300 ease-in-out flex items-center px-4 border-black
 }

@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 
 
 const contactSchema = new Schema({
-    name:{
+    firstname:{
         type:String,
         required:true
     },
-    firstname:{
+    lastname:{
         type:String,
         required:true
     },
@@ -22,7 +22,6 @@ const contactSchema = new Schema({
     },
     typeOfContact:{
         type:String,
-        enum:['amis', "patron", "other", "family", "friend", "colleague", "acquaintance", "business", "customer", "partner", "supplier", "other"],
         required:true
         
     },
