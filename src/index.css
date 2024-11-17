@@ -14,7 +14,7 @@ button{
 }
 
 .modal{
-    @apply absolute
+    @apply absolute top-20 min-h-screen w-full bg-gray-700/50 z-10 flex items-center justify-center;
 }
 .form-div{
     @apply flex flex-col gap-1 w-full  text-lg;

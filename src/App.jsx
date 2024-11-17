@@ -12,6 +12,7 @@ function App() {
   return (
     <div className="">
       <Header />
+
       <div className="flex  justify-center gap-8 p-4">
         <div className="column w-[800px]">
           <ManageContacts onSelectContact={handleSelectContact} />
