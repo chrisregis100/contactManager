@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 
-function UpdateForm({ refreshList, CloseForm, contactId }) {
+function UpdateForm({ CloseForm, contactId }) {
   const [contactType, setContactType] = useState([]);
   const [country, setCountry] = useState([]);
   const [firstname, setFirstname] = useState("");
@@ -19,7 +19,6 @@ function UpdateForm({ refreshList, CloseForm, contactId }) {
       const response = await fetch("http://localhost:5000/api/contactType");
       if (response.ok) {
         await response.json().then((data) => {
-          console.log(data);
           setContactType(data);
         });
       }

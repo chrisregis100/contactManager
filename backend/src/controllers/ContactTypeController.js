@@ -4,7 +4,6 @@ const ContactTypes = require("../models/ContactTypes");
 module.exports.SetCreateContactType=async (req, res) => {
   try {
     const  {contactType}  = req.body;
-    console.log(contactType);
     
     const typeContact = new ContactTypes({
       contactType,

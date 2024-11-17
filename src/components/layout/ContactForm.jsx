@@ -19,7 +19,6 @@ function ContactForm({ refreshList, CloseForm }) {
       const response = await fetch("http://localhost:5000/api/contactType");
       if (response.ok) {
         await response.json().then((data) => {
-          console.log(data);
           setContactType(data);
         });
       }

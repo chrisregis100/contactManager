@@ -46,12 +46,9 @@ function ManageContacts({ onSelectContact }) {
 
   function handleClick() {
     setClicked(!clicked);
-    console.log(clicked);
   }
 
   function handleSelectContact(contactId) {
-    console.log("cliqué");
-    console.log(contactId);
     onSelectContact(contactId);
   }
   return (

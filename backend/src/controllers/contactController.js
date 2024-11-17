@@ -4,7 +4,6 @@ const Contact = require("../models/Contacts");
 module.exports.SetCreateContact = async (req, res) => {
   try {
     const {firstname, lastname, phoneNumber, email, typeOfContact } = req.body;
-    console.log(req.body)
     
     const contact = new Contact({
       firstname,

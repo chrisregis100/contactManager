@@ -21,8 +21,6 @@ function PageContact({ contactId, onClose }) {
         }
       );
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
         setLoading(false);
         onClose();
         toast.success("Contact deleted sucessfully");
@@ -41,7 +39,6 @@ function PageContact({ contactId, onClose }) {
       );
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setDetails(data);
         setLoading(false);
       } else {
